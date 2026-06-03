@@ -1,8 +1,10 @@
+import Image from "next/image";
+
 const cards = [
-  { icon: "ti-rosette-discount-check", title: "Réseau de confiance", desc: "Uniquement des vendeurs vérifiés, sélectionnés sur leur historique et leur fiabilité." },
-  { icon: "ti-bolt", title: "Contact direct & rapide", desc: "Instagram ou WhatsApp Business — réponse en quelques minutes, 7j/7." },
-  { icon: "ti-package", title: "Packages sur mesure", desc: "Hôtel, transport, accès VIP — on construit l'expérience complète à vos côtés." },
-  { icon: "ti-shield-lock", title: "Paiement sécurisé", desc: "Virement bancaire ou PayPal entre proches. Modalités confirmées avant transaction." },
+  { icon: "/img/icone_01.png", title: "Réseau de confiance", desc: "Uniquement des vendeurs vérifiés, sélectionnés sur leur historique et leur fiabilité." },
+  { icon: "/img/icone_02.png", title: "Contact direct & rapide", desc: "Instagram ou WhatsApp Business — réponse en quelques minutes, 7j/7." },
+  { icon: "/img/icone_03.png", title: "Packages sur mesure", desc: "Hôtel, transport, accès VIP — on construit l'expérience complète à vos côtés." },
+  { icon: "/img/icone_04.png", title: "Paiement sécurisé", desc: "Virement bancaire ou PayPal entre proches. Modalités confirmées avant transaction." },
 ];
 
 export default function WhyUs() {
@@ -24,10 +26,12 @@ export default function WhyUs() {
           {cards.map((card) => (
             <div className="why-card" key={card.title}>
               <div className="why-icon">
-                <i className={`ti ${card.icon}`} />
+                <Image src={card.icon} alt={card.title} width={72} height={72} />
               </div>
-              <h3 className="why-title">{card.title}</h3>
-              <p className="why-desc">{card.desc}</p>
+              <div className="why-body">
+                <h3 className="why-title">{card.title}</h3>
+                <p className="why-desc">{card.desc}</p>
+              </div>
             </div>
           ))}
         </div>

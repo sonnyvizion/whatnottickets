@@ -1,13 +1,21 @@
-const items = [
-  { icon: "ti-rosette-discount-check", label: "Vendeurs vérifiés" },
-  { icon: "ti-bolt", label: "Réponse rapide" },
-  { icon: "ti-headset", label: "Accompagnement humain" },
-  { icon: "ti-shield-check", label: "Paiement sécurisé" },
-  { icon: "ti-star", label: "+250 clients satisfaits" },
-  { icon: "ti-clock", label: "Disponible 7j/7" },
+import Image from "next/image";
+
+const icons = [
+  "/img/icone_01.png",
+  "/img/icone_02.png",
+  "/img/icone_03.png",
+  "/img/icone_04.png",
 ];
 
-// Triplé pour un loop parfaitement fluide
+const items = [
+  { label: "Vendeurs vérifiés" },
+  { label: "Réponse rapide" },
+  { label: "Accompagnement humain" },
+  { label: "Paiement sécurisé" },
+  { label: "+250 clients satisfaits" },
+  { label: "Disponible 7j/7" },
+];
+
 const track = [...items, ...items, ...items];
 
 export default function TrustStrip() {
@@ -16,8 +24,8 @@ export default function TrustStrip() {
       <div className="trust-marquee-track">
         {track.map((item, i) => (
           <div className="trust-pill" key={i}>
+            <Image src={icons[i % icons.length]} alt="" width={40} height={40} style={{ flexShrink: 0 }} />
             <span>{item.label}</span>
-            <i className={`ti ${item.icon}`} />
           </div>
         ))}
       </div>
