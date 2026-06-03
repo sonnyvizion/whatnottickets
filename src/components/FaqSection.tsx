@@ -62,7 +62,6 @@ export default function FaqSection({ faqs }: { faqs?: Faq[] }) {
     <section className="section section-tinted" id="faq">
       <div className="container">
         <div className="section-head section-head-center reveal">
-          <div className="section-eyebrow">FAQ</div>
           <h2 className="section-title display">Questions fréquentes</h2>
         </div>
         <div className="faq-layout reveal">

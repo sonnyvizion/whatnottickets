@@ -11,14 +11,11 @@ export default function WhyUs() {
   return (
     <section className="section">
       <div className="container">
-        <div className="section-head section-head-row reveal">
-          <div>
-            <div className="section-eyebrow">Pourquoi nous</div>
-            <h2 className="section-title display">
-              La fiabilité, <span className="silver-shine">sans le stress</span>
-            </h2>
-          </div>
-          <p className="section-sub">
+        <div className="section-head section-head-center reveal">
+          <h2 className="section-title display">
+            La fiabilité, <span className="silver-shine">sans le stress</span>
+          </h2>
+          <p style={{ fontSize: 15, color: "#7A8499", marginTop: 16, lineHeight: 1.65 }}>
             Une expérience pensée pour vous concentrer sur ce qui compte vraiment.
           </p>
         </div>

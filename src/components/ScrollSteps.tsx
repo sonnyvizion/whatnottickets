@@ -177,7 +177,6 @@ export default function ScrollSteps() {
           <h2 className="ssp-title display" key={active + "t"}>{step.title}</h2>
           <p className="ssp-body" key={active + "b"}>{step.body}</p>
           <div className="ssp-hint">
-            <span>Scroll pour continuer</span>
             <div className="ssp-hint-bar">
               <div className="ssp-hint-fill" style={{ width: `${stepProgress * 100}%` }} />
             </div>
