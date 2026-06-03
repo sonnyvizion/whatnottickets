@@ -15,9 +15,14 @@ export const event = defineType({
       title: "Catégorie",
       options: {
         list: [
-          { title: "Foot", value: "foot" },
           { title: "Concert", value: "concert" },
+          { title: "Festival", value: "festival" },
+          { title: "Sport", value: "sport" },
+          { title: "Football", value: "foot" },
+          { title: "Basketball", value: "basket" },
+          { title: "Baskets / Sneakers", value: "baskets" },
           { title: "Spectacle", value: "spectacle" },
+          { title: "Événement", value: "evenement" },
           { title: "Autre", value: "autre" },
         ],
       },

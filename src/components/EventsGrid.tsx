@@ -5,9 +5,14 @@ import { useState } from "react";
 import { Event } from "@/sanity/types";
 
 const CATEGORY_ICONS: Record<string, string> = {
-  foot: "ti-trophy",
   concert: "ti-microphone-2",
+  festival: "ti-music",
+  sport: "ti-trophy",
+  foot: "ti-ball-football",
+  basket: "ti-ball-basketball",
+  baskets: "ti-shoe",
   spectacle: "ti-masks-theater",
+  evenement: "ti-calendar-event",
   autre: "ti-ticket",
 };
 
