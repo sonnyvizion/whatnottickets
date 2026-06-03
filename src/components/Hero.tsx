@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-const SLIDES = [
+const FALLBACK_SLIDES = [
   "/img/banner-tickets.webp",
   "/img/carou_01.webp",
   "/img/carou_02.webp",
@@ -11,19 +11,21 @@ const SLIDES = [
 
 const INTERVAL = 5000;
 
-export default function Hero() {
+export default function Hero({ heroImages }: { heroImages?: string[] }) {
+  const slides = heroImages?.length ? heroImages : FALLBACK_SLIDES;
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    if (slides.length <= 1) return;
     const t = setInterval(() => {
-      setCurrent((c) => (c + 1) % SLIDES.length);
+      setCurrent((c) => (c + 1) % slides.length);
     }, INTERVAL);
     return () => clearInterval(t);
-  }, []);
+  }, [slides.length]);
 
   return (
     <section className="hero hero-img" id="accueil">
-      {SLIDES.map((src, i) => (
+      {slides.map((src, i) => (
         <div
           key={src}
           className="hero-img-bg"
@@ -51,16 +53,18 @@ export default function Hero() {
             Faire une demande
           </Link>
         </div>
-        <div className="hero-dots">
-          {SLIDES.map((_, i) => (
-            <button
-              key={i}
-              className={`hero-dot${i === current ? " active" : ""}`}
-              onClick={() => setCurrent(i)}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
-        </div>
+        {slides.length > 1 && (
+          <div className="hero-dots">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                className={`hero-dot${i === current ? " active" : ""}`}
+                onClick={() => setCurrent(i)}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

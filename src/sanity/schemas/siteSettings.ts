@@ -6,6 +6,12 @@ export const siteSettings = defineType({
   title: "Paramètres du site",
   fields: [
     defineField({ name: "heroTagline", type: "string", title: "Tagline du hero" }),
+    defineField({
+      name: "heroImages",
+      type: "array",
+      title: "Images du hero (carousel)",
+      of: [{ type: "image", options: { hotspot: true } }],
+    }),
     defineField({ name: "whatsappLink", type: "url", title: "Lien WhatsApp Business global" }),
     defineField({ name: "instagramLink", type: "url", title: "Lien Instagram global" }),
     defineField({ name: "contactEmail", type: "string", title: "Email de contact" }),

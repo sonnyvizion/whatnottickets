@@ -37,7 +37,7 @@ export default async function HomePage() {
       />
       <Nav />
       <main>
-        <Hero />
+        <Hero heroImages={settings?.heroImages} />
         <TrustStrip />
 
         <section className="section" id="concerts">

@@ -99,7 +99,8 @@ export default function ScrollSteps() {
   const stepProgress = (progress * steps.length) % 1;
 
   // Opacité : apparaît progressivement dans le dernier tiers d'entrée
-  const panelOpacity = Math.max(0, Math.min(1, 1 - entryOffset / (window.innerHeight * 0.6)));
+  const vh = typeof window !== "undefined" ? window.innerHeight : 800;
+  const panelOpacity = Math.max(0, Math.min(1, 1 - entryOffset / (vh * 0.6)));
 
 
   const goTo = (i: number) => {

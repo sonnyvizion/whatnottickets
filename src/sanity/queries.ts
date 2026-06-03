@@ -49,7 +49,8 @@ export const faqQuery = groq`
   *[_type == "faq"] | order(order asc) {
     _id,
     question,
-    answer
+    answer,
+    "image": image.asset->url
   }
 `;
 
@@ -57,6 +58,7 @@ export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
     _id,
     heroTagline,
+    "heroImages": heroImages[].asset->url,
     whatsappLink,
     instagramLink,
     contactEmail,

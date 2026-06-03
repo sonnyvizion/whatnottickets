@@ -50,6 +50,7 @@ export interface Faq {
 }
 
 export interface SiteSettings {
+  heroImages?: string[];
   _id: string;
   heroTagline?: string;
   whatsappLink?: string;
