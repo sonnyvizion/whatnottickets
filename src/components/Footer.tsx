@@ -16,8 +16,7 @@ export default function Footer({
       <div className="footer-grid">
         <div>
           <div className="logo">
-            <div className="logo-mark">W</div>
-            <span className="logo-text">WhatnotTickets</span>
+            <img src="/img/logo_white.png" alt="WhatnotTickets" style={{ height: 36, width: "auto" }} />
           </div>
           <p className="footer-brand-text">
             Conciergerie billets premium. Concerts, matchs, spectacles — on trouve vos places.
