@@ -6,6 +6,16 @@ import * as THREE from "three";
 
 const POOL_SIZE = 7;
 const FADE_SPEED = 5.0;
+const GLOW_COUNT = 6;
+
+const GLOW_COLORS: [number, number, number][] = [
+  [0.863, 0.196, 0.196], // red  rgb(220,50,50)
+  [0.196, 0.314, 0.863], // blue rgb(50,80,220)
+  [0.863, 0.196, 0.196],
+  [0.196, 0.314, 0.863],
+  [0.863, 0.196, 0.196],
+  [0.196, 0.314, 0.863],
+];
 
 const vertexShader = `
   varying vec2 vUv;
@@ -15,7 +25,7 @@ const vertexShader = `
   }
 `;
 
-const fragmentShader = `
+const flashFragmentShader = `
   uniform float uOpacity;
   varying vec2 vUv;
   void main() {
@@ -28,7 +38,124 @@ const fragmentShader = `
   }
 `;
 
+const glowFragmentShader = `
+  uniform float uOpacity;
+  uniform vec3 uColor;
+  varying vec2 vUv;
+  void main() {
+    vec2 centered = vUv - 0.5;
+    float dist = length(centered) * 2.0;
+    float alpha = pow(max(0.0, 1.0 - dist), 3.0) * uOpacity;
+    gl_FragColor = vec4(uColor, alpha);
+  }
+`;
+
 type FlashState = { active: boolean; opacity: number };
+
+type GlowState = {
+  vx: number;
+  vy: number;
+  baseOpacity: number;
+  phase: number;
+  period: number;
+  sizePx: number;
+};
+
+function GlowPool() {
+  const { viewport, size, scene } = useThree();
+  const meshesRef = useRef<THREE.Mesh[]>([]);
+  const statesRef = useRef<GlowState[]>([]);
+  const initializedRef = useRef(false);
+
+  useEffect(() => {
+    const meshes: THREE.Mesh[] = [];
+    const states: GlowState[] = [];
+
+    for (let i = 0; i < GLOW_COUNT; i++) {
+      const [r, g, b] = GLOW_COLORS[i];
+      const mat = new THREE.ShaderMaterial({
+        vertexShader,
+        fragmentShader: glowFragmentShader,
+        uniforms: {
+          uOpacity: { value: 0 },
+          uColor: { value: new THREE.Color(r, g, b) },
+        },
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+      const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), mat);
+      scene.add(mesh);
+      meshes.push(mesh);
+
+      const speed = 0.3 + Math.random() * 0.5;
+      const angle = Math.random() * Math.PI * 2;
+      states.push({
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        baseOpacity: 0.08 + Math.random() * 0.10,
+        phase: Math.random() * Math.PI * 2,
+        period: 3 + Math.random() * 3,
+        sizePx: 300 + Math.random() * 300,
+      });
+    }
+
+    meshesRef.current = meshes;
+    statesRef.current = states;
+    initializedRef.current = false;
+
+    return () => {
+      for (const mesh of meshes) {
+        scene.remove(mesh);
+        mesh.geometry.dispose();
+        (mesh.material as THREE.ShaderMaterial).dispose();
+      }
+    };
+  }, [scene]);
+
+  useFrame((state, delta) => {
+    if (size.width === 0 || meshesRef.current.length === 0) return;
+    const px = viewport.width / size.width;
+    const hw = viewport.width / 2;
+    const hh = viewport.height / 2;
+    const elapsed = state.clock.elapsedTime;
+
+    if (!initializedRef.current) {
+      meshesRef.current.forEach((mesh, i) => {
+        const s = statesRef.current[i];
+        mesh.scale.setScalar(s.sizePx * px);
+        mesh.position.set(
+          (Math.random() - 0.5) * viewport.width,
+          (Math.random() - 0.5) * viewport.height,
+          -1
+        );
+      });
+      initializedRef.current = true;
+    }
+
+    meshesRef.current.forEach((mesh, i) => {
+      const s = statesRef.current[i];
+      const mat = mesh.material as THREE.ShaderMaterial;
+
+      mesh.position.x += s.vx * delta * px;
+      mesh.position.y += s.vy * delta * px;
+
+      if (Math.abs(mesh.position.x) > hw) {
+        s.vx = -s.vx;
+        mesh.position.x = Math.sign(mesh.position.x) * hw;
+      }
+      if (Math.abs(mesh.position.y) > hh) {
+        s.vy = -s.vy;
+        mesh.position.y = Math.sign(mesh.position.y) * hh;
+      }
+
+      const pulse = 0.7 + 0.3 * Math.sin(elapsed * (Math.PI * 2) / s.period + s.phase);
+      mat.uniforms.uOpacity.value = s.baseOpacity * pulse;
+    });
+  });
+
+  return null;
+}
 
 function FlashPool() {
   const { viewport, size, scene } = useThree();
@@ -44,7 +171,7 @@ function FlashPool() {
     for (let i = 0; i < POOL_SIZE; i++) {
       const mat = new THREE.ShaderMaterial({
         vertexShader,
-        fragmentShader,
+        fragmentShader: flashFragmentShader,
         uniforms: { uOpacity: { value: 0 } },
         transparent: true,
         blending: THREE.AdditiveBlending,
@@ -127,6 +254,7 @@ export default function CameraFlashes() {
       }}
       frameloop="always"
     >
+      <GlowPool />
       <FlashPool />
     </Canvas>
   );
