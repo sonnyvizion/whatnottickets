@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={inter.variable}>
       <body>
         <SmoothScroll />
-        <CameraFlashes />
+<CameraFlashes />
         <div style={{ position: "relative", zIndex: 1 }}>
           {children}
         </div>

@@ -56,6 +56,7 @@ html {
 }
 
 body {
+  position: relative;
   font-family: var(--font-sans);
   background: #0B0F1A;
   color: #C5CCD9;
@@ -235,7 +236,7 @@ button {
 .nav-mobile a:hover { color: #C9A961; }
 
 /* ===================== HERO ===================== */
-.hero { position: relative; padding: 140px 32px 100px; text-align: center; overflow: hidden; min-height: calc(85vh - 73px); display: flex; align-items: center; justify-content: center; background: #0B0F1A; }
+.hero { position: relative; padding: 140px 32px 100px; text-align: center; overflow: hidden; min-height: calc(85vh - 73px); display: flex; align-items: center; justify-content: center; background: transparent; }
 /* Hero avec image de fond */
 .hero-img { padding: 0; min-height: 85vh; }
 .hero-img-bg {
@@ -263,11 +264,11 @@ button {
     rgba(11,15,26,1) 100%
   );
 }
-.hero-dots { display: flex; gap: 8px; justify-content: center; margin-top: 32px; }
+.hero-dots { display: none; }
 .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); border: none; cursor: pointer; padding: 0; transition: background 0.3s ease, transform 0.3s ease; }
 .hero-dot.active { background: #FFF; transform: scale(1.3); }
 .hero-title { font-size: clamp(32px,4.2vw,52px); font-weight: 700; color: #FFF; margin-bottom: 20px; letter-spacing: -1.5px; text-shadow: 0 2px 40px rgba(0,0,0,0.4); text-align: center; }
-.hero-content { position: relative; z-index: 3; max-width: 860px; margin: 0 auto; animation: fadeUp .8s ease; padding: 0 24px; text-align: center; }
+.hero-content { position: relative; z-index: 3; max-width: 860px; margin: 0 auto; animation: fadeUp .8s ease; padding: 80px 24px 0; text-align: center; }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border: 1px solid rgba(201,169,97,0.35); background: rgba(201,169,97,0.05); border-radius: 999px; font-size: 11px; color: #C9A961; letter-spacing: 2.5px; margin-bottom: 28px; text-transform: uppercase; font-weight: 600; }
 .eyebrow-dot { width: 6px; height: 6px; background: #C9A961; border-radius: 50%; animation: pulse 2s ease infinite; box-shadow: 0 0 8px rgba(201,169,97,0.8); flex-shrink: 0; }
 .hero h1 { margin-bottom: 24px; letter-spacing: -2px; }
@@ -281,7 +282,7 @@ button {
 .trust-marquee-wrap {
   position: relative;
   padding: 36px 0;
-  background: #0B0F1A;
+  background: transparent;
   overflow: hidden;
   /* Fondu gauche et droite vers le noir */
   mask-image: linear-gradient(
@@ -311,7 +312,7 @@ button {
 .trust-pill {
   display: flex; align-items: center; justify-content: space-between; gap: 14px;
   flex-shrink: 0;
-  font-size: 14px; color: #C5CCD9; font-weight: 500;
+  font-family: "Neue Kaine", "Inter Tight", sans-serif; font-size: 14px; color: #C5CCD9; font-weight: 500;
   padding: 8px 34px;
   border: 1px solid rgba(255,255,255,0.11);
   border-radius: 14px;
@@ -329,7 +330,7 @@ button {
 
 /* ===================== SECTIONS ===================== */
 .section { padding: 120px 32px; position: relative; }
-.section-tinted { background: #0E1322; }
+.section-tinted { background: rgba(14, 19, 34, 0.75); }
 .section-eyebrow { font-size: 11px; color: #C9A961; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; font-weight: 600; text-align: center; }
 .section-title { font-size: clamp(32px,4vw,52px); letter-spacing: -1.2px; line-height: 1.1; color: #FFF; text-align: center; }
 .section-head-center { text-align: center; max-width: 680px; margin: 0 auto 56px; }
@@ -361,7 +362,9 @@ button {
 .event-date { font-size: 11px; color: #7A8499; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 500; }
 .event-title { font-family: "Neue Kaine","Inter Tight",sans-serif; font-size: 20px; font-weight: 600; color: #FFF; margin-bottom: 6px; letter-spacing: -0.4px; line-height: 1.25; }
 .event-venue { font-size: 13px; color: #7A8499; display: flex; align-items: center; gap: 6px; }
-.event-foot { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(216,221,230,0.06); display: flex; justify-content: space-between; align-items: center; }
+.event-foot { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(216,221,230,0.06); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.event-ctas { display: flex; gap: 8px; flex-wrap: wrap; }
+.event-ctas .btn { font-size: 12px; padding: 8px 14px; }
 .event-price-label { font-size: 11px; color: #7A8499; margin-bottom: 2px; }
 .event-price { font-family: "Neue Kaine","Inter Tight",sans-serif; font-size: 22px; font-weight: 700; color: #C9A961; letter-spacing: -0.5px; }
 .event-link { font-size: 13px; color: #C9A961; display: flex; align-items: center; gap: 5px; transition: gap .2s; font-weight: 500; }
@@ -500,8 +503,13 @@ button {
   line-height: 1.08; margin-bottom: 24px; animation: fadeSlideUp .45s ease .06s both;
 }
 .ssp-body {
-  font-size: clamp(15px,1.2vw,18px); color: rgba(255,255,255,0.5);
-  line-height: 1.2; max-width: 500px; margin: 0 auto; animation: fadeSlideUp .45s ease .12s both;
+  color: #ffffff;
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.2;
+  animation: .45s .12s both fadeSlideUp;
+  font-weight: 700;
 }
 
 /* Hint */
@@ -534,6 +542,39 @@ button {
   .ssp-deco { right: -40px; font-size: 120px; }
   .ssp-tabs { font-size: 12px; }
   .ssp-tab { padding: 8px 14px; }
+}
+
+/* ===================== SSP MOBILE (cartes empilées) ===================== */
+.ssp-mobile { display: none; }
+.ssp-desktop { display: block; }
+
+@media (max-width: 768px) {
+  .ssp-desktop { display: none; }
+  .ssp-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px 60px;
+  }
+  .ssp-mobile-card {
+    position: relative;
+    height: 50vh;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #090d18;
+    box-shadow:
+      0 20px 50px rgba(0,0,0,0.5),
+      -3px 3px 14px rgba(220,50,50,0.22),
+      3px -3px 14px rgba(50,80,220,0.22);
+  }
+  .ssp-mobile-card .ssp-content {
+    margin-left: 0;
+    text-align: center;
+    padding: 0 24px;
+  }
+  .ssp-mobile-card .ssp-body {
+    margin: 0 auto;
+  }
 }
 
 /* ===================== WHY US ===================== */
@@ -609,7 +650,9 @@ button {
   .nav-links { display: none; }
   .nav-toggle { display: block; }
   .nav-inner .btn span { display: none; }
-  .events-grid { grid-template-columns: repeat(2,1fr); gap: 10px; padding: 0 12px; }
+  .events-grid { grid-template-columns: repeat(2,1fr); gap: 10px; padding: 0; }
+  .event-foot { flex-direction: column; align-items: center; }
+  .event-ctas { justify-content: center; }
   .event-img { height: 160px; }
   .event-body { padding: 12px 12px 14px; }
   .event-title { font-size: 15px; }

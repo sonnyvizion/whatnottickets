@@ -11,8 +11,27 @@ export const featuredEventsQuery = groq`
     venue,
     city,
     minPrice,
-    soldOut
+    soldOut,
+    featured,
+    whatsappLink
   }[0...6]
+`;
+
+export const allEventsQuery = groq`
+  *[_type == "event"] | order(eventDate asc) {
+    _id,
+    title,
+    "slug": slug.current,
+    "coverImageUrl": coverImage.asset->url,
+    category,
+    eventDate,
+    venue,
+    city,
+    minPrice,
+    soldOut,
+    featured,
+    whatsappLink
+  }
 `;
 
 export const eventBySlugQuery = groq`

@@ -35,8 +35,8 @@ export default function Nav() {
           </Link>
 
           <div className="nav-links">
-            <Link href="#accueil">Accueil</Link>
-            <Link href="#concerts">Concerts</Link>
+            <Link href="/">Accueil</Link>
+            <Link href="#concerts">Events</Link>
             <Link href="#how">Comment ça marche</Link>
             <Link href="#avis">Package</Link>
             <Link href="#contact">Contact</Link>
@@ -57,8 +57,8 @@ export default function Nav() {
       </nav>
 
       <div className={`nav-mobile ${open ? "open" : ""}`}>
-        <Link href="#accueil" onClick={() => setOpen(false)}>Accueil</Link>
-        <Link href="#concerts" onClick={() => setOpen(false)}>Concerts</Link>
+        <Link href="/" onClick={() => setOpen(false)}>Accueil</Link>
+        <Link href="#concerts" onClick={() => setOpen(false)}>Events</Link>
         <Link href="#how" onClick={() => setOpen(false)}>Comment ça marche</Link>
         <Link href="#avis" onClick={() => setOpen(false)}>Package</Link>
         <Link href="#contact" onClick={() => setOpen(false)}>Contact</Link>

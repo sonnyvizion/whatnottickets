@@ -60,8 +60,6 @@ export default function ScrollSteps() {
     const totalScrollable = el.offsetHeight - window.innerHeight;
     const scrolled = -rect.top;
 
-    // Offset scroll-driven : quand rect.top > 0, le panel est en dessous du viewport
-    // rect.top pixels plus bas que le centre → pas de chevauchement avec la section précédente
     const newOffset = Math.max(0, rect.top);
     if (Math.abs(entryOffsetRef.current - newOffset) > 1) {
       entryOffsetRef.current = newOffset;
@@ -91,98 +89,102 @@ export default function ScrollSteps() {
   }, []);
 
   useEffect(() => {
+    // RAF uniquement sur desktop (le panel mobile est géré en CSS pur)
+    if (window.innerWidth <= 768) return;
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
   }, [tick]);
 
   const step = steps[active];
   const stepProgress = (progress * steps.length) % 1;
-
-  // Opacité : apparaît progressivement dans le dernier tiers d'entrée
   const vh = typeof window !== "undefined" ? window.innerHeight : 800;
   const panelOpacity = Math.max(0, Math.min(1, 1 - entryOffset / (vh * 0.6)));
-
 
   const goTo = (i: number) => {
     const el = outerRef.current;
     if (!el) return;
-    // Lenis scroll via custom event
     const target = el.offsetTop + (i / steps.length) * (el.offsetHeight - window.innerHeight);
     window.dispatchEvent(new CustomEvent("lenis-scroll-to", { detail: { target } }));
   };
 
   return (
-    <div
-      ref={outerRef}
-      id="how"
-      style={{ height: `${steps.length * 60}vh`, position: "relative" }}
-    >
-      {/* Panel — fixed sauf en "after" où il redevient absolu pour partir avec la page */}
+    <>
+      {/* Mobile : cartes empilées — visible uniquement via CSS ≤768px */}
+      <div className="ssp-mobile" id="how">
+        {steps.map((s) => (
+          <div key={s.num} className="ssp-mobile-card">
+            {s.image && <div className="ssp-bg" style={{ backgroundImage: `url(${s.image})` }} />}
+            <div className="ssp-overlay" />
+            <div className="ssp-content">
+              <div className="ssp-num">{s.num}</div>
+              <h2 className="ssp-title display">{s.title}</h2>
+              <p className="ssp-body">{s.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop : scroll-driven — visible uniquement via CSS >768px */}
       <div
-        className="ssp-panel"
-        style={{
-          position: phase === "after" ? "absolute" : "fixed",
-          top: phase === "after" ? "auto" : "50%",
-          bottom: phase === "after" ? "6vh" : "auto",
-          left: "50%",
-          right: "auto",
-          opacity: panelOpacity,
-          transform: phase === "after" ? "translateX(-50%)" : `translate(-50%, calc(-50% + ${entryOffset}px))`,
-          pointerEvents: entryOffset === 0 ? "auto" : "none",
-        }}
+        ref={outerRef}
+        className="ssp-desktop"
+        style={{ height: `${steps.length * 100}vh`, position: "relative" }}
       >
-        {/* Image de fond */}
-        {step.image && (
-          <div
-            className="ssp-bg"
-            key={active + "bg"}
-            style={{ backgroundImage: `url(${step.image})` }}
-          />
-        )}
-        <div className="ssp-overlay" />
-
-        {/* Blobs (uniquement si pas d'image) */}
-        {!step.image && <div className="ssp-blob ssp-blob-1" style={{ background: step.blob1 }} />}
-        {!step.image && <div className="ssp-blob ssp-blob-2" style={{ background: step.blob2 }} />}
-
-        {/* Tabs */}
-        <div className="ssp-tabs">
-          {steps.map((s, i) => (
-            <button
-              key={i}
-              className={`ssp-tab${i === active ? " active" : ""}`}
-              onClick={() => goTo(i)}
-            >
-              {s.tab}
-            </button>
-          ))}
-        </div>
-
-        {/* Numéro décoratif */}
-        <div className="ssp-deco" key={active}>{step.num}</div>
-
-        {/* Barre verticale */}
-        <div className="ssp-bar">
-          {steps.map((s, i) => (
-            <button key={i} className={`ssp-bar-item${i === active ? " active" : ""}`} onClick={() => goTo(i)}>
-              <span className="ssp-bar-dot" />
-              <span className="ssp-bar-label">{s.tab}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Contenu centré sur le fond */}
-        <div className="ssp-content">
-          <div className="ssp-num" key={active + "n"}>{step.num}</div>
-          <h2 className="ssp-title display" key={active + "t"}>{step.title}</h2>
-          <p className="ssp-body" key={active + "b"}>{step.body}</p>
-          <div className="ssp-hint">
-            <div className="ssp-hint-bar">
-              <div className="ssp-hint-fill" style={{ width: `${stepProgress * 100}%` }} />
+        <div
+          className="ssp-panel"
+          style={{
+            position: phase === "after" ? "absolute" : "fixed",
+            top: phase === "after" ? "auto" : "50%",
+            bottom: phase === "after" ? "6vh" : "auto",
+            left: "50%",
+            right: "auto",
+            opacity: panelOpacity,
+            transform: phase === "after" ? "translateX(-50%)" : `translate(-50%, calc(-50% + ${entryOffset}px))`,
+            pointerEvents: entryOffset === 0 ? "auto" : "none",
+          }}
+        >
+          {step.image && (
+            <div
+              className="ssp-bg"
+              key={active + "bg"}
+              style={{ backgroundImage: `url(${step.image})` }}
+            />
+          )}
+          <div className="ssp-overlay" />
+          {!step.image && <div className="ssp-blob ssp-blob-1" style={{ background: step.blob1 }} />}
+          {!step.image && <div className="ssp-blob ssp-blob-2" style={{ background: step.blob2 }} />}
+          <div className="ssp-tabs">
+            {steps.map((s, i) => (
+              <button
+                key={i}
+                className={`ssp-tab${i === active ? " active" : ""}`}
+                onClick={() => goTo(i)}
+              >
+                {s.tab}
+              </button>
+            ))}
+          </div>
+          <div className="ssp-deco" key={active}>{step.num}</div>
+          <div className="ssp-bar">
+            {steps.map((s, i) => (
+              <button key={i} className={`ssp-bar-item${i === active ? " active" : ""}`} onClick={() => goTo(i)}>
+                <span className="ssp-bar-dot" />
+                <span className="ssp-bar-label">{s.tab}</span>
+              </button>
+            ))}
+          </div>
+          <div className="ssp-content">
+            <div className="ssp-num" key={active + "n"}>{step.num}</div>
+            <h2 className="ssp-title display" key={active + "t"}>{step.title}</h2>
+            <p className="ssp-body" key={active + "b"}>{step.body}</p>
+            <div className="ssp-hint">
+              <div className="ssp-hint-bar">
+                <div className="ssp-hint-fill" style={{ width: `${stepProgress * 100}%` }} />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

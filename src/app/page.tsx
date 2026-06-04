@@ -7,6 +7,7 @@ import {
 } from "@/sanity/queries";
 import { Event, Testimonial, Faq, SiteSettings } from "@/sanity/types";
 
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import TrustStrip from "@/components/TrustStrip";
@@ -48,7 +49,12 @@ export default async function HomePage() {
                 Les events <span className="silver-shine">du moment</span>
               </h2>
             </div>
-            <EventsGrid events={events} />
+            <EventsGrid events={events} whatsappLink={settings?.whatsappLink} instagramLink={settings?.instagramLink} />
+            <div style={{ textAlign: "center", marginTop: "48px" }}>
+              <Link href="/events" className="btn btn-secondary btn-lg">
+                Voir les events <i className="ti ti-arrow-right" />
+              </Link>
+            </div>
           </div>
         </section>
 
