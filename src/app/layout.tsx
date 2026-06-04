@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import CameraFlashesWrapper from "@/components/CameraFlashesWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +24,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={inter.variable}>
       <body>
         <SmoothScroll />
-        {children}
+        <CameraFlashesWrapper />
+        <div style={{ position: "relative", zIndex: 1 }}>
+          {children}
+        </div>
       </body>
     </html>
   );
