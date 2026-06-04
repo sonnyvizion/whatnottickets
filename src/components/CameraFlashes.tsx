@@ -37,9 +37,13 @@ function FlashPool() {
   const statesRef = useRef<FlashState[]>(
     Array.from({ length: POOL_SIZE }, () => ({ active: false, opacity: 0 }))
   );
-  const nextSpawnRef = useRef(0);
+  const nextSpawnRef = useRef(300 + Math.random() * 400);
+  const uniformsRef = useRef(
+    Array.from({ length: POOL_SIZE }, () => ({ uOpacity: { value: 0 } }))
+  );
 
   useFrame((state, delta) => {
+    if (size.width === 0) return;
     const now = state.clock.elapsedTime * 1000;
     // 1 CSS pixel en unités three.js (zoom=1 → ratio=1, mais on calcule proprement)
     const px = viewport.width / size.width;
@@ -96,7 +100,7 @@ function FlashPool() {
             ref={(el) => { materialsRef.current[i] = el; }}
             vertexShader={vertexShader}
             fragmentShader={fragmentShader}
-            uniforms={{ uOpacity: { value: 0 } }}
+            uniforms={uniformsRef.current[i]}
             transparent
             blending={THREE.AdditiveBlending}
             depthWrite={false}
