@@ -15,7 +15,7 @@ export default function FinalCta({ whatsappLink = "https://wa.me/33743522051", i
           <a
             href={whatsappLink}
             className="btn btn-lg"
-            style={{ background: "#25D366", border: "none", color: "#FFF" }}
+            style={{ background: "linear-gradient(135deg, #1a9e4f 0%, #25D366 60%, #2ecc71 100%)", border: "none", color: "#FFF" }}
             target="_blank"
             rel="noopener noreferrer"
           >
