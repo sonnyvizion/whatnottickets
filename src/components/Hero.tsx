@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const FALLBACK_SLIDES = [
-  "/img/concert_banner copie.webp",
+  "/img/concert_banner_copie.webp",
 ];
 
 const INTERVAL = 5000;
