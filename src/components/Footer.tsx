@@ -8,7 +8,7 @@ interface FooterProps {
 
 export default function Footer({
   whatsappLink = "https://wa.me/33743522051",
-  instagramLink = "#",
+  instagramLink = "https://ig.me/m/whatnottickets",
   email = "contact@whatnottickets.com",
 }: FooterProps) {
   return (
