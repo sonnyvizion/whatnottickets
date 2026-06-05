@@ -214,8 +214,23 @@ button {
 .logo-mark { width: 36px; height: 36px; border: 1px solid #C9A961; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #C9A961; font-family: "Neue Kaine","Inter Tight",sans-serif; font-weight: 700; font-size: 18px; font-style: italic; flex-shrink: 0; }
 .logo-text { font-size: 14px; font-weight: 500; letter-spacing: 0.5px; color: #FFF; }
 .nav-links { display: flex; gap: 40px; font-size: 15px; color: #E8ECF3; font-weight: 500; }
-.nav-links a { transition: color .2s; }
+.nav-links a {
+  position: relative;
+  transition: color .25s ease;
+  padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  width: 0; height: 1.5px;
+  background: linear-gradient(90deg, rgba(220,50,50,0.8), rgba(50,80,220,0.8));
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width .28s cubic-bezier(0.4, 0, 0.2, 1);
+}
 .nav-links a:hover { color: #FFF; }
+.nav-links a:hover::after { width: 100%; }
 .btn-insta {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; line-height: 1;
   padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 600;
@@ -248,6 +263,8 @@ button {
   transform: scale(1.08);
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.2s ease;
   animation: heroZoom 8s ease-out forwards;
+  -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 95%);
+  mask-image: linear-gradient(to bottom, black 20%, transparent 95%);
 }
 @keyframes heroZoom {
   from { transform: scale(1.12); }
@@ -258,10 +275,9 @@ button {
   position: absolute; inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.15) 0%,
-    rgba(0,0,0,0.35) 40%,
-    rgba(11,15,26,0.75) 80%,
-    rgba(11,15,26,1) 100%
+    rgba(0,0,0,0.2) 0%,
+    rgba(0,0,0,0.1) 50%,
+    transparent 100%
   );
 }
 .hero-dots { display: none; }
@@ -625,7 +641,7 @@ button {
 .footer { padding: 60px 32px 32px; border-top: 1px solid rgba(216,221,230,0.06); background: #080C15; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; max-width: 1240px; margin: 0 auto 36px; }
 .footer-brand-text { font-size: 13px; color: #7A8499; max-width: 280px; line-height: 1.6; margin-top: 14px; }
-.footer-col-title { font-size: 11px; color: #C9A961; letter-spacing: 2.5px; margin-bottom: 16px; font-weight: 600; text-transform: uppercase; }
+.footer-col-title { font-family: "Neue Kaine", "Inter Tight", sans-serif; font-size: 11px; color: #C9A961; letter-spacing: 2.5px; margin-bottom: 16px; font-weight: 900; text-transform: uppercase; }
 .footer-links { display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #7A8499; }
 .footer-links a { transition: color .2s; display: flex; align-items: center; gap: 8px; }
 .footer-links a:hover { color: #C9A961; }
@@ -677,7 +693,7 @@ button {
   .container { padding: 0; }
   .final-cta { padding: 80px 20px; }
   .btn-lg { padding: 12px 22px; font-size: 14px; }
-  .hero-cta .btn-lg { width: 80%; text-align: center; justify-content: center; font-size: 16px; padding: 9px 14px; }
+  .hero-cta .btn-lg { width: 80%; text-align: center; justify-content: center; align-items: center; font-size: 16px; padding: 12px 14px; line-height: 1; }
   .faq-layout { grid-template-columns: 1fr; }
   .faq-visual { display: none; }
 }

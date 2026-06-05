@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const FALLBACK_SLIDES = [
-  "/img/foule-banner.webp",
+  "/img/concert_banner.webp",
 ];
 
 const INTERVAL = 5000;
@@ -23,6 +23,10 @@ export default function Hero({ heroImages }: { heroImages?: string[] }) {
 
   return (
     <section className="hero hero-img" id="accueil">
+      <div
+        className="hero-img-bg"
+        style={{ backgroundImage: `url('${slides[current]}')` }}
+      />
       <div className="hero-content">
         <h1 className="display hero-title">
           Trouvez vos billets pour les<br />
