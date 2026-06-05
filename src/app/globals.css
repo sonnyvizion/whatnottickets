@@ -288,7 +288,7 @@ button {
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border: 1px solid rgba(201,169,97,0.35); background: rgba(201,169,97,0.05); border-radius: 999px; font-size: 11px; color: #C9A961; letter-spacing: 2.5px; margin-bottom: 28px; text-transform: uppercase; font-weight: 600; }
 .eyebrow-dot { width: 6px; height: 6px; background: #C9A961; border-radius: 50%; animation: pulse 2s ease infinite; box-shadow: 0 0 8px rgba(201,169,97,0.8); flex-shrink: 0; }
 .hero h1 { margin-bottom: 24px; letter-spacing: -2px; }
-.hero-sub { font-family: "Neue Kaine", "Inter Tight", sans-serif; font-size: clamp(15px,1.3vw,17px); font-weight: 700; color: rgba(255,255,255,0.75); max-width: 520px; margin: 0 auto 44px; line-height: 1.2; text-align: center; }
+.hero-sub { font-family: "Neue Kaine", "Inter Tight", sans-serif; font-size: clamp(15px,1.3vw,17px); font-weight: 700; color: rgba(255,255,255,0.75); max-width: 520px; margin: 0 auto 44px; line-height: 1.2; text-align: center; text-shadow: 0 2px 20px rgba(0,0,0,1), 0 0px 40px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,1); }
 .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; font-family: "Neue Kaine", "Inter Tight", sans-serif; font-weight: 900; }
 .scroll-hint { position: relative; margin-top: 60px; color: rgba(255,255,255,0.3); font-size: 22px; animation: bounce 2s ease infinite; }
 

@@ -3,7 +3,7 @@ interface FinalCtaProps {
   instagramLink?: string;
 }
 
-export default function FinalCta({ whatsappLink = "#", instagramLink = "#" }: FinalCtaProps) {
+export default function FinalCta({ whatsappLink = "https://wa.me/33743522051", instagramLink = "#" }: FinalCtaProps) {
   return (
     <section className="final-cta" id="contact">
       <div className="final-cta-inner">

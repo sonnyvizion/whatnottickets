@@ -24,7 +24,7 @@ function formatDate(dateStr: string) {
 }
 
 function buildWhatsappLink(base?: string, eventTitle?: string) {
-  if (!base) return "#contact";
+  if (!base) base = "https://wa.me/33743522051";
   const msg = encodeURIComponent(`Bonjour, je souhaite faire une demande pour : ${eventTitle ?? "un événement"}`);
   return `${base}?text=${msg}`;
 }
