@@ -38,7 +38,6 @@ export default function Nav() {
             <Link href="/#accueil">Accueil</Link>
             <Link href="/events">Events</Link>
             <Link href="/#how">Comment ça marche</Link>
-            <Link href="/#avis">Package</Link>
             <Link href="/#contact">Contact</Link>
           </div>
 
@@ -60,7 +59,6 @@ export default function Nav() {
         <Link href="/#accueil" onClick={() => setOpen(false)}>Accueil</Link>
         <Link href="/events" onClick={() => setOpen(false)}>Events</Link>
         <Link href="/#how" onClick={() => setOpen(false)}>Comment ça marche</Link>
-        <Link href="/#avis" onClick={() => setOpen(false)}>Package</Link>
         <Link href="/#contact" onClick={() => setOpen(false)}>Contact</Link>
         <Link href="/#contact" className="btn-insta nav-mobile-insta" onClick={() => setOpen(false)}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">

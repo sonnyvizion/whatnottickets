@@ -1,9 +1,11 @@
+import { INSTAGRAM_LINK } from "@/lib/links";
+
 interface FinalCtaProps {
   whatsappLink?: string;
   instagramLink?: string;
 }
 
-export default function FinalCta({ whatsappLink = "https://wa.me/33743522051", instagramLink = "https://ig.me/m/whatnottickets" }: FinalCtaProps) {
+export default function FinalCta({ whatsappLink = "https://wa.me/33743522051" }: FinalCtaProps) {
   return (
     <section className="final-cta" id="contact">
       <div className="final-cta-inner">
@@ -22,7 +24,7 @@ export default function FinalCta({ whatsappLink = "https://wa.me/33743522051", i
             <i className="ti ti-brand-whatsapp" /> WhatsApp
           </a>
           <a
-            href={instagramLink}
+            href={INSTAGRAM_LINK}
             className="btn btn-lg"
             style={{ background: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)", border: "none", color: "#FFF" }}
             target="_blank"

@@ -102,8 +102,9 @@ button {
   font-weight: 600;
   background-size: 200% 100%;
   animation: shimmer 8s ease-in-out infinite;
-  padding: 0.05em 0.05em 0.2em;
+  padding: 0.05em 0.25em 0.2em 0.05em;
   margin-bottom: -0.2em;
+  margin-right: -0.2em;
 }
 
 /* Reveal animation */

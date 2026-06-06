@@ -1,6 +1,7 @@
 "use client";
 
 import { Event } from "@/sanity/types";
+import { INSTAGRAM_LINK } from "@/lib/links";
 
 const CATEGORY_ICONS: Record<string, string> = {
   concert: "ti-microphone-2",
@@ -32,7 +33,6 @@ function buildWhatsappLink(base?: string, eventTitle?: string) {
 export default function EventsGrid({
   events,
   whatsappLink,
-  instagramLink,
 }: {
   events: Event[];
   whatsappLink?: string;
@@ -101,7 +101,7 @@ export default function EventsGrid({
                   <i className="ti ti-brand-whatsapp" /> WhatsApp
                 </a>
                 <a
-                  href={event.instagramLink || instagramLink || "#contact"}
+                  href={INSTAGRAM_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary"

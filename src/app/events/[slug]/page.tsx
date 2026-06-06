@@ -4,6 +4,7 @@ import { eventBySlugQuery, allEventSlugsQuery } from "@/sanity/queries";
 import { Event } from "@/sanity/types";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { INSTAGRAM_LINK } from "@/lib/links";
 
 export const revalidate = 60;
 
@@ -136,11 +137,9 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                       <i className="ti ti-brand-whatsapp" /> Réserver via WhatsApp
                     </a>
                   )}
-                  {event.instagramLink && (
-                    <a href={event.instagramLink} className="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer" style={{ justifyContent: "center" }}>
-                      <i className="ti ti-brand-instagram" /> DM Instagram
-                    </a>
-                  )}
+                  <a href={INSTAGRAM_LINK} className="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer" style={{ justifyContent: "center" }}>
+                    <i className="ti ti-brand-instagram" /> DM Instagram
+                  </a>
                 </div>
               )}
 

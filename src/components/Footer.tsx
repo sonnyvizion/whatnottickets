@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { INSTAGRAM_LINK } from "@/lib/links";
 
 interface FooterProps {
   whatsappLink?: string;
@@ -8,7 +9,6 @@ interface FooterProps {
 
 export default function Footer({
   whatsappLink = "https://wa.me/33743522051",
-  instagramLink = "https://ig.me/m/whatnottickets",
   email = "contact@whatnottickets.com",
 }: FooterProps) {
   return (
@@ -39,7 +39,7 @@ export default function Footer({
             <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
               <i className="ti ti-brand-whatsapp" /> WhatsApp
             </a>
-            <a href={instagramLink} target="_blank" rel="noopener noreferrer">
+            <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer">
               <i className="ti ti-brand-instagram" /> Instagram
             </a>
             <a href={`mailto:${email}`}>
