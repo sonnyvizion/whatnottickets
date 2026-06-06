@@ -1,18 +1,31 @@
 import { INSTAGRAM_LINK } from "@/lib/links";
 
+interface FinalCtaContent {
+  title?: string;
+  titleHighlight?: string;
+  titleSuffix?: string;
+  subtitle?: string;
+}
+
 interface FinalCtaProps {
   whatsappLink?: string;
   instagramLink?: string;
+  content?: FinalCtaContent;
 }
 
-export default function FinalCta({ whatsappLink = "https://wa.me/33743522051" }: FinalCtaProps) {
+export default function FinalCta({ whatsappLink = "https://wa.me/33743522051", content }: FinalCtaProps) {
+  const title = content?.title ?? "Prêt à vivre l'événement";
+  const titleHighlight = content?.titleHighlight ?? "de l'année";
+  const titleSuffix = content?.titleSuffix ?? "?";
+  const subtitle = content?.subtitle ?? "Contactez-nous, on s'occupe du reste.";
+
   return (
     <section className="final-cta" id="contact">
       <div className="final-cta-inner">
         <h2 className="display">
-          Prêt à vivre l&apos;événement <span className="silver-shine">de l&apos;année</span> ?
+          {title} <span className="silver-shine">{titleHighlight}</span> {titleSuffix}
         </h2>
-        <p className="final-cta-sub">Contactez-nous, on s&apos;occupe du reste.</p>
+        <p className="final-cta-sub">{subtitle}</p>
         <div className="final-cta-btns">
           <a
             href={whatsappLink}

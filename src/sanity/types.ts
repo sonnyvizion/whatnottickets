@@ -49,6 +49,55 @@ export interface Faq {
   image?: string;
 }
 
+export interface HomeStep {
+  num?: string;
+  tab?: string;
+  title?: string;
+  body?: string;
+}
+
+export interface HomeWhyCard {
+  title?: string;
+  desc?: string;
+}
+
+export interface HomePage {
+  hero?: {
+    title?: string;
+    subtitle?: string;
+    primaryCtaLabel?: string;
+    secondaryCtaLabel?: string;
+  };
+  trustItems?: string[];
+  events?: {
+    eyebrow?: string;
+    title?: string;
+    titleHighlight?: string;
+    ctaLabel?: string;
+  };
+  steps?: HomeStep[];
+  whyUs?: {
+    title?: string;
+    titleHighlight?: string;
+    subtitle?: string;
+    cards?: HomeWhyCard[];
+  };
+  testimonials?: {
+    eyebrow?: string;
+    title?: string;
+    ratingMeta?: string;
+  };
+  faq?: {
+    title?: string;
+  };
+  finalCta?: {
+    title?: string;
+    titleHighlight?: string;
+    titleSuffix?: string;
+    subtitle?: string;
+  };
+}
+
 export interface SiteSettings {
   heroImages?: string[];
   _id: string;

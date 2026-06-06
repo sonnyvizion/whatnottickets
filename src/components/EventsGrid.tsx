@@ -64,7 +64,7 @@ export default function EventsGrid({
                 {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
               </div>
             )}
-            {event.featured && <div className="event-badge">FEATURED</div>}
+            {event.featured && <div className="event-badge">À LA UNE</div>}
             {event.soldOut && (
               <div className="event-badge" style={{ background: "#3D4A66", color: "#C5CCD9" }}>
                 COMPLET

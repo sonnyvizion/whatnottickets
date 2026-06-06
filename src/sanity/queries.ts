@@ -88,3 +88,16 @@ export const siteSettingsQuery = groq`
 export const allEventSlugsQuery = groq`
   *[_type == "event"] { "slug": slug.current }
 `;
+
+export const homePageQuery = groq`
+  *[_type == "homePage"][0] {
+    hero,
+    trustItems,
+    events,
+    steps,
+    whyUs,
+    testimonials,
+    faq,
+    finalCta
+  }
+`;

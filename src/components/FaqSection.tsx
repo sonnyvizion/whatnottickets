@@ -53,7 +53,7 @@ function FaqItem({ faq, isOpen, onToggle }: { faq: Faq; isOpen: boolean; onToggl
   );
 }
 
-export default function FaqSection({ faqs }: { faqs?: Faq[] }) {
+export default function FaqSection({ faqs, title }: { faqs?: Faq[]; title?: string }) {
   const items = faqs?.length ? faqs : DEFAULT_FAQS;
   const [activeId, setActiveId] = useState<string>(items[0]._id);
   const activeItem = items.find((f) => f._id === activeId) ?? items[0];
@@ -62,7 +62,7 @@ export default function FaqSection({ faqs }: { faqs?: Faq[] }) {
     <section className="section section-tinted" id="faq">
       <div className="container">
         <div className="section-head section-head-center reveal">
-          <h2 className="section-title display">Questions fréquentes</h2>
+          <h2 className="section-title display">{title ?? "Questions fréquentes"}</h2>
         </div>
         <div className="faq-layout reveal">
           {/* Photo gauche */}

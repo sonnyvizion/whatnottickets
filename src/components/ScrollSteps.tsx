@@ -1,47 +1,32 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { HomeStep } from "@/sanity/types";
 
-const steps = [
-  {
-    num: "01",
-    tab: "Choisissez",
-    title: "Choisissez votre événement",
-    body: "Parcourez notre catalogue d'événements disponibles — concerts, matchs, spectacles. Sélectionnez la date et la catégorie de place qui vous convient.",
-    blob1: "rgba(201,169,97,0.2)",
-    blob2: "rgba(50,80,220,0.15)",
-    image: "/img/carou_01.webp",
-  },
-  {
-    num: "02",
-    tab: "Contactez",
-    title: "Contactez-nous directement",
-    body: "Envoyez-nous un message via Instagram ou WhatsApp Business. Notre équipe vous répond en quelques minutes, 7j/7, pour confirmer la disponibilité.",
-    blob1: "rgba(50,80,220,0.2)",
-    blob2: "rgba(220,50,50,0.15)",
-    image: "/img/carou_02.webp",
-  },
-  {
-    num: "03",
-    tab: "Payez",
-    title: "Payez en toute sécurité",
-    body: "Virement bancaire ou PayPal entre proches. Toutes les modalités sont confirmées avec vous avant la transaction. Zéro surprise.",
-    blob1: "rgba(220,50,50,0.18)",
-    blob2: "rgba(201,169,97,0.18)",
-    image: "/img/carou_03.webp",
-  },
-  {
-    num: "04",
-    tab: "Profitez",
-    title: "Vivez l'instant",
-    body: "Recevez vos billets par mail ou WhatsApp. Vous n'avez plus qu'à profiter — on s'est occupé du reste.",
-    blob1: "rgba(30,200,120,0.14)",
-    blob2: "rgba(50,80,220,0.18)",
-    image: "/img/carou_04.webp",
-  },
+// Style/visuel par étape (non éditable) — fusionné par index avec le contenu Sanity
+const STEP_VISUALS = [
+  { blob1: "rgba(201,169,97,0.2)", blob2: "rgba(50,80,220,0.15)", image: "/img/carou_01.webp" },
+  { blob1: "rgba(50,80,220,0.2)", blob2: "rgba(220,50,50,0.15)", image: "/img/carou_02.webp" },
+  { blob1: "rgba(220,50,50,0.18)", blob2: "rgba(201,169,97,0.18)", image: "/img/carou_03.webp" },
+  { blob1: "rgba(30,200,120,0.14)", blob2: "rgba(50,80,220,0.18)", image: "/img/carou_04.webp" },
 ];
 
-export default function ScrollSteps() {
+const DEFAULT_STEPS: HomeStep[] = [
+  { num: "01", tab: "Choisissez", title: "Choisissez votre événement", body: "Parcourez notre catalogue d'événements disponibles — concerts, matchs, spectacles. Sélectionnez la date et la catégorie de place qui vous convient." },
+  { num: "02", tab: "Contactez", title: "Contactez-nous directement", body: "Envoyez-nous un message via Instagram ou WhatsApp Business. Notre équipe vous répond en quelques minutes, 7j/7, pour confirmer la disponibilité." },
+  { num: "03", tab: "Payez", title: "Payez en toute sécurité", body: "Virement bancaire ou PayPal entre proches. Toutes les modalités sont confirmées avec vous avant la transaction. Zéro surprise." },
+  { num: "04", tab: "Profitez", title: "Vivez l'instant", body: "Recevez vos billets par mail ou WhatsApp. Vous n'avez plus qu'à profiter — on s'est occupé du reste." },
+];
+
+export default function ScrollSteps({ steps: stepsProp }: { steps?: HomeStep[] }) {
+  const content = stepsProp?.length ? stepsProp : DEFAULT_STEPS;
+  const steps = content.map((s, i) => ({
+    num: s.num ?? String(i + 1).padStart(2, "0"),
+    tab: s.tab ?? "",
+    title: s.title ?? "",
+    body: s.body ?? "",
+    ...STEP_VISUALS[i % STEP_VISUALS.length],
+  }));
   const outerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);

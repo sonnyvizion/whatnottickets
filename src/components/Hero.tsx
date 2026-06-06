@@ -9,9 +9,21 @@ const FALLBACK_SLIDES = [
 
 const INTERVAL = 5000;
 
-export default function Hero({ heroImages }: { heroImages?: string[] }) {
+interface HeroContent {
+  title?: string;
+  subtitle?: string;
+  primaryCtaLabel?: string;
+  secondaryCtaLabel?: string;
+}
+
+export default function Hero({ heroImages, content }: { heroImages?: string[]; content?: HeroContent }) {
   const slides = heroImages?.length ? heroImages : FALLBACK_SLIDES;
   const [current, setCurrent] = useState(0);
+
+  const title = content?.title ?? "Trouvez vos billets pour les événements les plus demandés";
+  const subtitle = content?.subtitle ?? "WhatnotTickets vous accompagne dans la recherche de places fiables pour vos concerts, matchs et spectacles préférés.";
+  const primaryCtaLabel = content?.primaryCtaLabel ?? "Voir les events";
+  const secondaryCtaLabel = content?.secondaryCtaLabel ?? "Faire une demande";
 
   useEffect(() => {
     if (slides.length <= 1) return;
@@ -28,20 +40,14 @@ export default function Hero({ heroImages }: { heroImages?: string[] }) {
         style={{ backgroundImage: `url('${slides[current]}')` }}
       />
       <div className="hero-content">
-        <h1 className="display hero-title">
-          Trouvez vos billets pour les<br />
-          événements les plus demandés
-        </h1>
-        <p className="hero-sub">
-          WhatnotTickets vous accompagne dans la recherche de places fiables
-          pour vos concerts, matchs et spectacles préférés.
-        </p>
+        <h1 className="display hero-title">{title}</h1>
+        <p className="hero-sub">{subtitle}</p>
         <div className="hero-cta">
           <Link href="/events" className="btn btn-hero-outline btn-lg">
-            Voir les events
+            {primaryCtaLabel}
           </Link>
           <Link href="#contact" className="btn btn-hero-white btn-lg">
-            Faire une demande
+            {secondaryCtaLabel}
           </Link>
         </div>
         {slides.length > 1 && (

@@ -4,18 +4,28 @@ function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
 }
 
-export default function TestimonialsGrid({ testimonials }: { testimonials: Testimonial[] }) {
+interface TestimonialsContent {
+  eyebrow?: string;
+  title?: string;
+  ratingMeta?: string;
+}
+
+export default function TestimonialsGrid({ testimonials, content }: { testimonials: Testimonial[]; content?: TestimonialsContent }) {
+  const eyebrow = content?.eyebrow ?? "Avis clients";
+  const title = content?.title ?? "Ils nous font confiance";
+  const ratingMeta = content?.ratingMeta ?? "+250 clients satisfaits";
+
   return (
     <section className="section section-tinted" id="avis">
       <div className="container">
         <div className="section-head section-head-row reveal">
           <div>
-            <div className="section-eyebrow">Avis clients</div>
-            <h2 className="section-title display">Ils nous font confiance</h2>
+            <div className="section-eyebrow">{eyebrow}</div>
+            <h2 className="section-title display">{title}</h2>
           </div>
           <div className="testimonials-rating">
             <div className="stars">★★★★★</div>
-            <div className="rating-meta">+250 clients satisfaits</div>
+            <div className="rating-meta">{ratingMeta}</div>
           </div>
         </div>
         <div className="testimonials-grid reveal">
