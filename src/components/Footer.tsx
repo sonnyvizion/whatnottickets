@@ -65,6 +65,17 @@ export default function Footer({
           <Link href="/#contact">Contact</Link>
         </div>
       </div>
+
+      <div className="footer-credit">
+        Site propulsé par{" "}
+        <a
+          href="https://youngwildandpixels.com/fr/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Young, Wild &amp; Pixels
+        </a>
+      </div>
     </footer>
   );
 }

@@ -652,6 +652,9 @@ button {
 .footer-legal { display: flex; gap: 20px; flex-wrap: wrap; }
 .footer-legal a { transition: color .2s; }
 .footer-legal a:hover { color: #C9A961; }
+.footer-credit { max-width: 1240px; margin: 16px auto 0; padding-top: 16px; border-top: 1px solid rgba(216,221,230,0.05); font-size: 11px; color: #5A6378; text-align: center; }
+.footer-credit a { color: #8B94A8; font-weight: 600; transition: color .2s; }
+.footer-credit a:hover { color: #C9A961; }
 
 /* ===================== LEGAL PAGES ===================== */
 .legal-container { max-width: 800px; margin: 0 auto; padding: 0 32px; }
