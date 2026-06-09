@@ -99,6 +99,7 @@ export interface HomePage {
 }
 
 export interface SiteSettings {
+  comingSoon?: boolean;
   heroImages?: string[];
   _id: string;
   heroTagline?: string;

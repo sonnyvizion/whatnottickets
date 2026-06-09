@@ -5,6 +5,13 @@ export const siteSettings = defineType({
   type: "document",
   title: "Paramètres du site",
   fields: [
+    defineField({
+      name: "comingSoon",
+      type: "boolean",
+      title: "Site en construction (Coming soon)",
+      description: "Si activé, le site public affiche une page « Bientôt disponible ». Le studio reste accessible. Effet en ~1 min après publication.",
+      initialValue: false,
+    }),
     defineField({ name: "heroTagline", type: "string", title: "Tagline du hero" }),
     defineField({
       name: "heroImages",
