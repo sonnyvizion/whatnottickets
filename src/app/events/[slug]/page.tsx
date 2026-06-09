@@ -20,7 +20,7 @@ export async function generateMetadata(
   const title = event.title;
   const description = event.shortDescription
     ?? `Billets pour ${event.title}${event.city ? ` à ${event.city}` : ""}. Obtenez vos places via WhatnotTickets.`;
-  const image = event.coverImageUrl ?? `${BASE_URL}/img/banner-tickets.webp`;
+  const image = event.coverImageUrl ?? `${BASE_URL}/og-image.jpg`;
   const url = `${BASE_URL}/events/${slug}`;
 
   return {

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description: "Billets pour concerts, matchs et spectacles. Vendeurs vérifiés, réponse rapide, paiement sécurisé.",
     images: [
       {
-        url: "/img/banner-tickets.webp",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "WhatnotTickets — Billetterie premium",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "WhatnotTickets — Billetterie premium pour concerts, matchs & spectacles",
     description: "Billets pour concerts, matchs et spectacles. Vendeurs vérifiés, réponse rapide, paiement sécurisé.",
-    images: ["/img/banner-tickets.webp"],
+    images: ["/og-image.jpg"],
   },
   alternates: {
     canonical: BASE_URL,
