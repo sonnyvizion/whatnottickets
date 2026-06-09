@@ -46,7 +46,7 @@ function FaqItem({ faq, isOpen, onToggle }: { faq: Faq; isOpen: boolean; onToggl
         style={{ height, overflow: "hidden", transition: "height 0.4s cubic-bezier(0.22,1,0.36,1)" }}
       >
         <div ref={bodyRef} className="faq-body">
-          {faq.answer ? getAnswerText(faq.answer) : ""}
+          <p>{faq.answer ? getAnswerText(faq.answer) : ""}</p>
         </div>
       </div>
     </div>

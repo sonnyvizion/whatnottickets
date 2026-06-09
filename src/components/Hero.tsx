@@ -35,9 +35,18 @@ export default function Hero({ heroImages, content }: { heroImages?: string[]; c
 
   return (
     <section className="hero hero-img" id="accueil">
+      {/* div bg pour animations CSS + ::after overlay */}
       <div
         className="hero-img-bg"
         style={{ backgroundImage: `url('${slides[current]}')` }}
+      />
+      {/* img SEO-visible pour les crawlers, visuellement masquée */}
+      <img
+        src={slides[current]}
+        alt="WhatnotTickets — Billetterie premium concerts, matchs et spectacles"
+        fetchPriority="high"
+        style={{ position: "absolute", width: 1, height: 1, opacity: 0, pointerEvents: "none" }}
+        aria-hidden="true"
       />
       <div className="hero-content">
         <h1 className="display hero-title">{title}</h1>

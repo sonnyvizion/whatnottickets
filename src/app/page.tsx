@@ -6,11 +6,18 @@ import {
   siteSettingsQuery,
   homePageQuery,
 } from "@/sanity/queries";
-import { Event, Testimonial, Faq, SiteSettings, HomePage as HomePageContent } from "@/sanity/types";
+import { Event, Testimonial, Faq, SiteSettings, HomePage as HomePageContent, HomeStep } from "@/sanity/types";
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+
+export const metadata: Metadata = {
+  title: "WhatnotTickets — Billetterie premium pour concerts, matchs & spectacles",
+  description: "WhatnotTickets trouve vos billets pour les concerts, matchs et spectacles les plus demandés. Service de conciergerie personnalisé, vendeurs vérifiés, réponse rapide via WhatsApp et Instagram, paiement sécurisé.",
+  alternates: { canonical: "https://whatnottickets.fr" },
+};
 import TrustStrip from "@/components/TrustStrip";
 import EventsGrid from "@/components/EventsGrid";
 import ScrollSteps from "@/components/ScrollSteps";
@@ -61,6 +68,33 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {(() => {
+          const DEFAULT_STEPS: HomeStep[] = [
+            { num: "01", title: "Choisissez votre événement", body: "Parcourez notre catalogue d'événements disponibles — concerts, matchs, spectacles. Sélectionnez la date et la catégorie de place qui vous convient." },
+            { num: "02", title: "Contactez-nous directement", body: "Envoyez-nous un message via Instagram ou WhatsApp Business. Notre équipe vous répond en quelques minutes, 7j/7, pour confirmer la disponibilité." },
+            { num: "03", title: "Payez en toute sécurité", body: "Virement bancaire ou PayPal entre proches. Toutes les modalités sont confirmées avec vous avant la transaction. Zéro surprise." },
+            { num: "04", title: "Vivez l'instant", body: "Recevez vos billets par mail ou WhatsApp. Vous n'avez plus qu'à profiter — on s'est occupé du reste." },
+          ];
+          const steps = home?.steps?.length ? home.steps : DEFAULT_STEPS;
+          const schema = {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: "Comment obtenir vos billets avec WhatnotTickets",
+            description: "WhatnotTickets vous accompagne en 4 étapes pour obtenir vos billets d'événements.",
+            step: steps.map((s, i) => ({
+              "@type": "HowToStep",
+              position: i + 1,
+              name: s.title ?? "",
+              text: s.body ?? "",
+            })),
+          };
+          return (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+            />
+          );
+        })()}
         <ScrollSteps steps={home?.steps} />
         <WhyUs content={home?.whyUs} />
         <TestimonialsGrid testimonials={testimonials} content={home?.testimonials} />

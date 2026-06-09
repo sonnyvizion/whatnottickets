@@ -108,11 +108,25 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
     } : {}),
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: "https://whatnottickets.fr" },
+      { "@type": "ListItem", position: 2, name: "Événements", item: "https://whatnottickets.fr/events" },
+      { "@type": "ListItem", position: 3, name: event.title, item: `https://whatnottickets.fr/events/${slug}` },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
       <Nav />
@@ -158,9 +172,24 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             {/* Left: description */}
             <div>
               {event.shortDescription && (
-                <p style={{ fontSize: 18, color: "#C5CCD9", lineHeight: 1.7, marginBottom: 40 }}>
+                <p style={{ fontSize: 18, color: "#C5CCD9", lineHeight: 1.7, marginBottom: event.longDescription ? 24 : 40 }}>
                   {event.shortDescription}
                 </p>
+              )}
+
+              {event.longDescription && (event.longDescription as { _type: string; children?: { text?: string }[] }[]).length > 0 && (
+                <div style={{ marginBottom: 40 }}>
+                  {(event.longDescription as { _type: string; children?: { _type: string; text?: string }[] }[]).map((block, i) => {
+                    if (block._type !== "block") return null;
+                    const text = (block.children ?? []).map((s) => s.text ?? "").join("");
+                    if (!text) return null;
+                    return (
+                      <p key={i} style={{ fontSize: 15, color: "#8B94A8", lineHeight: 1.8, marginBottom: 12 }}>
+                        {text}
+                      </p>
+                    );
+                  })}
+                </div>
               )}
 
               {/* Price categories */}
