@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Politique de confidentialité — WhatnotTickets",
   description: "Politique de confidentialité et protection des données personnelles de WhatnotTickets.",
+  alternates: { canonical: "https://whatnottickets.fr/politique-confidentialite" },
 };
 
 export default function PolitiqueConfidentialite() {

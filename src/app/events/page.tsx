@@ -11,6 +11,16 @@ export const revalidate = 60;
 export const metadata = {
   title: "Tous les événements — WhatnotTickets",
   description: "Concerts, matchs, spectacles — trouvez votre billet parmi tous nos événements disponibles.",
+  alternates: { canonical: "https://whatnottickets.fr/events" },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "https://whatnottickets.fr/events",
+    siteName: "WhatnotTickets",
+    title: "Tous les événements — WhatnotTickets",
+    description: "Concerts, matchs, spectacles — trouvez votre billet parmi tous nos événements disponibles.",
+    images: [{ url: "https://whatnottickets.fr/img/banner-tickets.webp", width: 1200, height: 630 }],
+  },
 };
 
 export default async function EventsPage() {

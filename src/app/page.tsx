@@ -64,6 +64,28 @@ export default async function HomePage() {
         <ScrollSteps steps={home?.steps} />
         <WhyUs content={home?.whyUs} />
         <TestimonialsGrid testimonials={testimonials} content={home?.testimonials} />
+        {faqs.length > 0 && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: faqs.map((faq) => ({
+                  "@type": "Question",
+                  name: faq.question,
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: (faq.answer as { children?: { text?: string }[] }[] ?? [])
+                      .flatMap((b) => b.children ?? [])
+                      .map((s) => s.text ?? "")
+                      .join(""),
+                  },
+                })),
+              }),
+            }}
+          />
+        )}
         <FaqSection faqs={faqs} title={home?.faq?.title} />
         <FinalCta
           whatsappLink={settings?.whatsappLink}

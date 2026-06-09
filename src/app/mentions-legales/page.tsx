@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Mentions légales — WhatnotTickets",
   description: "Mentions légales du site WhatnotTickets.",
+  alternates: { canonical: "https://whatnottickets.fr/mentions-legales" },
 };
 
 export default function MentionsLegales() {

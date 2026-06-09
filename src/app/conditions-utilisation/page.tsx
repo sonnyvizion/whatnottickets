@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Conditions d'utilisation & de réservation — WhatnotTickets",
   description: "Conditions générales d'utilisation et de réservation de WhatnotTickets.",
+  alternates: { canonical: "https://whatnottickets.fr/conditions-utilisation" },
 };
 
 export default function ConditionsUtilisation() {

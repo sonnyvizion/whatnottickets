@@ -1,10 +1,49 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { eventBySlugQuery, allEventSlugsQuery } from "@/sanity/queries";
 import { Event } from "@/sanity/types";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { INSTAGRAM_LINK } from "@/lib/links";
+
+const BASE_URL = "https://whatnottickets.fr";
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params;
+  const event = await client.fetch<Event>(eventBySlugQuery, { slug }).catch(() => null);
+
+  if (!event) return {};
+
+  const title = event.title;
+  const description = event.shortDescription
+    ?? `Billets pour ${event.title}${event.city ? ` à ${event.city}` : ""}. Obtenez vos places via WhatnotTickets.`;
+  const image = event.coverImageUrl ?? `${BASE_URL}/img/banner-tickets.webp`;
+  const url = `${BASE_URL}/events/${slug}`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website",
+      locale: "fr_FR",
+      url,
+      siteName: "WhatnotTickets",
+      title,
+      description,
+      images: [{ url: image, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
 
 export const revalidate = 60;
 
@@ -33,8 +72,48 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
   if (!event) notFound();
 
+  const eventSchema = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: event.title,
+    startDate: event.eventDate ?? undefined,
+    ...(event.venue || event.city ? {
+      location: {
+        "@type": "Place",
+        name: event.venue ?? event.city,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: event.city ?? undefined,
+          addressCountry: "FR",
+        },
+      },
+    } : {}),
+    description: event.shortDescription ?? undefined,
+    image: event.coverImageUrl ?? undefined,
+    organizer: {
+      "@type": "Organization",
+      name: "WhatnotTickets",
+      url: "https://whatnottickets.fr",
+    },
+    ...(event.minPrice != null ? {
+      offers: {
+        "@type": "Offer",
+        price: event.minPrice,
+        priceCurrency: "EUR",
+        availability: event.soldOut
+          ? "https://schema.org/SoldOut"
+          : "https://schema.org/InStock",
+        url: `https://whatnottickets.fr/events/${slug}`,
+      },
+    } : {}),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
+      />
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
       <Nav />
 
