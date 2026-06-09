@@ -99,8 +99,8 @@ export default function ConditionsUtilisation() {
             </p>
             <p>
               Le prix final communiqué au client peut inclure, selon les cas, le prix du billet, les frais de
-              recherche, les frais de service, les frais de transfert, les frais de plateforme ou tout autre frais
-              communiqué au client avant validation.
+              recherche, les frais de service, les frais de transfert, les frais liés à l'utilisation de PayPal ou
+              tout autre frais communiqué au client avant validation.
             </p>
           </section>
 
