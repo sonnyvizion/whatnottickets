@@ -49,12 +49,20 @@ export default function Footer({
         </div>
       </div>
 
+      <div className="footer-disclaimer">
+        <p>© {new Date().getFullYear()} WhatnotTickets. Tous droits réservés.</p>
+        <p>
+          WhatnotTickets est un service de recherche, d'accompagnement et/ou de mise en relation autour de billets
+          d'événements. Le site ne permet pas l'achat direct de billets en ligne.
+        </p>
+      </div>
+
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} WhatnotTickets. Tous droits réservés.</span>
         <div className="footer-legal">
-          <Link href="#">Mentions légales</Link>
-          <Link href="#">CGV</Link>
-          <Link href="#">Confidentialité</Link>
+          <Link href="/mentions-legales">Mentions légales</Link>
+          <Link href="/conditions-utilisation">Conditions d'utilisation & de réservation</Link>
+          <Link href="/politique-confidentialite">Politique de confidentialité</Link>
+          <Link href="/#contact">Contact</Link>
         </div>
       </div>
     </footer>
