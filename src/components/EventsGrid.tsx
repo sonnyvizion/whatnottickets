@@ -2,7 +2,7 @@
 
 import { Event } from "@/sanity/types";
 import { INSTAGRAM_LINK } from "@/lib/links";
-import { getEventDates, formatEventDates } from "@/lib/dates";
+import { getEventDates, formatEventDatesCompact } from "@/lib/dates";
 
 const CATEGORY_ICONS: Record<string, string> = {
   concert: "ti-microphone-2",
@@ -66,7 +66,7 @@ export default function EventsGrid({
             {(() => {
               const dates = getEventDates(event);
               if (!dates.length) return null;
-              const { label, time } = formatEventDates(dates);
+              const { label, time } = formatEventDatesCompact(dates);
               return (
                 <div className="event-date">
                   <i className="ti ti-calendar" />
