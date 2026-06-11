@@ -6,6 +6,7 @@ import { Event } from "@/sanity/types";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { INSTAGRAM_LINK } from "@/lib/links";
+import { getEventDates, formatEventDates } from "@/lib/dates";
 
 const BASE_URL = "https://whatnottickets.fr";
 
@@ -72,11 +73,18 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
   if (!event) notFound();
 
+  const dates = getEventDates(event)
+    .slice()
+    .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+  const { label: datesLabel } = formatEventDates(dates);
+  const dateText = dates.length === 1 ? formatDate(dates[0]) : datesLabel;
+
   const eventSchema = {
     "@context": "https://schema.org",
     "@type": "Event",
     name: event.title,
-    startDate: event.eventDate ?? undefined,
+    startDate: dates[0] ?? undefined,
+    ...(dates.length > 1 ? { endDate: dates[dates.length - 1] } : {}),
     ...(event.venue || event.city ? {
       location: {
         "@type": "Place",
@@ -155,8 +163,8 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             {event.title}
           </h1>
           <div style={{ display: "flex", gap: 24, flexWrap: "wrap", color: "#8B94A8", fontSize: 14 }}>
-            {event.eventDate && (
-              <span><i className="ti ti-calendar" style={{ marginRight: 6 }} />{formatDate(event.eventDate)}</span>
+            {dateText && (
+              <span><i className="ti ti-calendar" style={{ marginRight: 6 }} />{dateText}</span>
             )}
             {(event.venue || event.city) && (
               <span><i className="ti ti-map-pin" style={{ marginRight: 6 }} />{[event.venue, event.city].filter(Boolean).join(", ")}</span>

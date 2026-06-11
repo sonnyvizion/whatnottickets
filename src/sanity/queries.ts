@@ -1,12 +1,13 @@
 import { groq } from "next-sanity";
 
 export const featuredEventsQuery = groq`
-  *[_type == "event"] | order(eventDate asc) {
+  *[_type == "event"] | order(coalesce(eventDates[0], eventDate) asc) {
     _id,
     title,
     "slug": slug.current,
     "coverImageUrl": coverImage.asset->url,
     category,
+    eventDates,
     eventDate,
     venue,
     city,
@@ -18,12 +19,13 @@ export const featuredEventsQuery = groq`
 `;
 
 export const allEventsQuery = groq`
-  *[_type == "event"] | order(eventDate asc) {
+  *[_type == "event"] | order(coalesce(eventDates[0], eventDate) asc) {
     _id,
     title,
     "slug": slug.current,
     "coverImageUrl": coverImage.asset->url,
     category,
+    eventDates,
     eventDate,
     venue,
     city,
@@ -41,6 +43,7 @@ export const eventBySlugQuery = groq`
     "coverImageUrl": coverImage.asset->url,
     "gallery": gallery[]{ "url": asset->url },
     category,
+    eventDates,
     eventDate,
     venue,
     city,

@@ -19,6 +19,7 @@ export interface Event {
   coverImageUrl?: string;
   gallery?: { url: string }[];
   category?: "foot" | "concert" | "spectacle" | "autre";
+  eventDates?: string[];
   eventDate?: string;
   venue?: string;
   city?: string;

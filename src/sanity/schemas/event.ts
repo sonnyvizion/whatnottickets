@@ -27,7 +27,20 @@ export const event = defineType({
         ],
       },
     }),
-    defineField({ name: "eventDate", type: "datetime", title: "Date et heure" }),
+    defineField({
+      name: "eventDates",
+      type: "array",
+      title: "Dates de l'event",
+      description: "Ajoute une ou plusieurs dates (ex. 11, 12 & 13 juin). La 1re date sert de référence pour le tri et le SEO.",
+      of: [{ type: "datetime" }],
+    }),
+    defineField({
+      name: "eventDate",
+      type: "datetime",
+      title: "Date (ancien champ)",
+      description: "Ancien champ date unique. Utilise plutôt « Dates de l'event » ci-dessus. Ce champ ne s'affiche que s'il contient déjà une valeur.",
+      hidden: ({ document }) => !document?.eventDate,
+    }),
     defineField({ name: "venue", type: "string", title: "Lieu" }),
     defineField({ name: "city", type: "string", title: "Ville" }),
     defineField({ name: "shortDescription", type: "text", title: "Description courte", rows: 2 }),
@@ -52,6 +65,15 @@ export const event = defineType({
     defineField({ name: "soldOut", type: "boolean", title: "Complet", initialValue: false }),
   ],
   preview: {
-    select: { title: "title", subtitle: "eventDate", media: "coverImage" },
+    select: { title: "title", dates: "eventDates", legacyDate: "eventDate", media: "coverImage" },
+    prepare({ title, dates, legacyDate, media }) {
+      const all: string[] = (dates?.length ? dates : legacyDate ? [legacyDate] : []) as string[];
+      const subtitle = all.length
+        ? all
+            .map((d) => new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }))
+            .join(" · ")
+        : "Aucune date";
+      return { title, subtitle, media };
+    },
   },
 });

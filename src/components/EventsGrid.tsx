@@ -2,6 +2,7 @@
 
 import { Event } from "@/sanity/types";
 import { INSTAGRAM_LINK } from "@/lib/links";
+import { getEventDates, formatEventDates } from "@/lib/dates";
 
 const CATEGORY_ICONS: Record<string, string> = {
   concert: "ti-microphone-2",
@@ -14,15 +15,6 @@ const CATEGORY_ICONS: Record<string, string> = {
   evenement: "ti-calendar-event",
   autre: "ti-ticket",
 };
-
-function formatDate(dateStr: string) {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("fr-FR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }) + " · " + d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
-}
 
 function buildWhatsappLink(base?: string, eventTitle?: string) {
   if (!base) base = "https://wa.me/33743522051";
@@ -71,12 +63,17 @@ export default function EventsGrid({
             )}
           </div>
           <div className="event-body">
-            {event.eventDate && (
-              <div className="event-date">
-                <i className="ti ti-calendar" />
-                {formatDate(event.eventDate)}
-              </div>
-            )}
+            {(() => {
+              const dates = getEventDates(event);
+              if (!dates.length) return null;
+              const { label, time } = formatEventDates(dates);
+              return (
+                <div className="event-date">
+                  <i className="ti ti-calendar" />
+                  {label}{time ? ` · ${time}` : ""}
+                </div>
+              );
+            })()}
             <h3 className="event-title">{event.title}</h3>
             {(event.venue || event.city) && (
               <div className="event-venue">
