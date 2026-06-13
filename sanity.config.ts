@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
+import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 import { schemaTypes } from "./src/sanity/schemas";
 
 const SINGLETONS = [
@@ -19,7 +20,7 @@ export default defineConfig({
 
   plugins: [
     structureTool({
-      structure: (S) =>
+      structure: (S, context) =>
         S.list()
           .title("Contenu")
           .items([
@@ -32,8 +33,16 @@ export default defineConfig({
                 )
             ),
             S.divider(),
+            // Liste d'events réordonnable par glisser-déposer (ordre = orderRank)
+            orderableDocumentListDeskItem({
+              type: "event",
+              title: "Events (ordre d'affichage)",
+              S,
+              context,
+            }),
             ...S.documentTypeListItems().filter(
-              (listItem) => !SINGLETON_IDS.includes(listItem.getId() as string)
+              (listItem) =>
+                ![...SINGLETON_IDS, "event"].includes(listItem.getId() as string)
             ),
           ]),
     }),

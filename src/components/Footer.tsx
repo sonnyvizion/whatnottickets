@@ -9,8 +9,9 @@ interface FooterProps {
 
 export default function Footer({
   whatsappLink = "https://wa.me/33743522051",
-  email = "contact@whatnottickets.com",
+  email,
 }: FooterProps) {
+  const mail = email ?? "whatnottickets1@gmail.com";
   return (
     <footer className="footer">
       <div className="footer-grid">
@@ -42,8 +43,8 @@ export default function Footer({
             <a href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer">
               <i className="ti ti-brand-instagram" /> Instagram
             </a>
-            <a href={`mailto:${email}`}>
-              <i className="ti ti-mail" /> {email}
+            <a href={`mailto:${mail}`}>
+              <i className="ti ti-mail" /> {mail}
             </a>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 
 export const featuredEventsQuery = groq`
-  *[_type == "event"] | order(coalesce(eventDates[0], eventDate) asc) {
+  *[_type == "event"] | order(orderRank, coalesce(eventDates[0], eventDate) asc) {
     _id,
     title,
     "slug": slug.current,
@@ -19,7 +19,7 @@ export const featuredEventsQuery = groq`
 `;
 
 export const allEventsQuery = groq`
-  *[_type == "event"] | order(coalesce(eventDates[0], eventDate) asc) {
+  *[_type == "event"] | order(orderRank, coalesce(eventDates[0], eventDate) asc) {
     _id,
     title,
     "slug": slug.current,

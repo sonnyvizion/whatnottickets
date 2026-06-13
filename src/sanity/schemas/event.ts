@@ -1,10 +1,12 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField } from "@sanity/orderable-document-list";
 
 export const event = defineType({
   name: "event",
   type: "document",
   title: "Event",
   fields: [
+    orderRankField({ type: "event" }),
     defineField({ name: "title", type: "string", title: "Nom de l'event", validation: (r) => r.required() }),
     defineField({ name: "slug", type: "slug", title: "Slug URL", options: { source: "title" }, validation: (r) => r.required() }),
     defineField({ name: "coverImage", type: "image", title: "Image principale", options: { hotspot: true } }),
