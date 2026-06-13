@@ -103,9 +103,22 @@
         "title": "Catégorie"
       },
       {
+        "description": "Ajoute une ou plusieurs dates (ex. 11, 12 & 13 juin). La 1re date sert de référence pour le tri et le SEO.",
+        "of": [
+          {
+            "type": "datetime"
+          }
+        ],
+        "name": "eventDates",
+        "type": "array",
+        "title": "Dates de l'event"
+      },
+      {
+        "description": "Ancien champ date unique. Utilise plutôt « Dates de l'event » ci-dessus. Ce champ ne s'affiche que s'il contient déjà une valeur.",
+        "hidden": "conditional",
         "name": "eventDate",
         "type": "datetime",
-        "title": "Date et heure"
+        "title": "Date (ancien champ)"
       },
       {
         "name": "venue",
@@ -574,6 +587,13 @@
   {
     "fields": [
       {
+        "initialValue": false,
+        "description": "Si activé, le site public affiche une page « Bientôt disponible ». Le studio reste accessible. Effet en ~1 min après publication.",
+        "name": "comingSoon",
+        "type": "boolean",
+        "title": "Site en construction (Coming soon)"
+      },
+      {
         "name": "heroTagline",
         "type": "string",
         "title": "Tagline du hero"
@@ -658,5 +678,311 @@
     "name": "siteSettings",
     "type": "document",
     "title": "Paramètres du site"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": false
+        },
+        "fields": [
+          {
+            "rows": 2,
+            "initialValue": "Trouvez vos billets pour les événements les plus demandés",
+            "name": "title",
+            "type": "text",
+            "title": "Titre"
+          },
+          {
+            "rows": 3,
+            "initialValue": "WhatnotTickets vous accompagne dans la recherche de places fiables pour vos concerts, matchs et spectacles préférés.",
+            "name": "subtitle",
+            "type": "text",
+            "title": "Sous-titre"
+          },
+          {
+            "initialValue": "Voir les events",
+            "name": "primaryCtaLabel",
+            "type": "string",
+            "title": "Bouton principal"
+          },
+          {
+            "initialValue": "Faire une demande",
+            "name": "secondaryCtaLabel",
+            "type": "string",
+            "title": "Bouton secondaire"
+          }
+        ],
+        "name": "hero",
+        "type": "object"
+      },
+      {
+        "initialValue": [
+          "Vendeurs vérifiés",
+          "Réponse rapide",
+          "Accompagnement humain",
+          "Paiement sécurisé",
+          "+250 clients satisfaits",
+          "Disponible 7j/7"
+        ],
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "trustItems",
+        "type": "array",
+        "title": "Bandeau confiance (pastilles défilantes)"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "Events",
+            "name": "eyebrow",
+            "type": "string"
+          },
+          {
+            "initialValue": "Les events",
+            "name": "title",
+            "type": "string",
+            "title": "Titre"
+          },
+          {
+            "initialValue": "du moment",
+            "description": "Partie du titre stylisée. Ex: « du moment »",
+            "name": "titleHighlight",
+            "type": "string",
+            "title": "Mot mis en avant (italique argenté)"
+          },
+          {
+            "initialValue": "Voir les events",
+            "name": "ctaLabel",
+            "type": "string",
+            "title": "Libellé bouton"
+          }
+        ],
+        "name": "events",
+        "type": "object",
+        "title": "Section Events"
+      },
+      {
+        "initialValue": [
+          {
+            "num": "01",
+            "tab": "Choisissez",
+            "title": "Choisissez votre événement",
+            "body": "Parcourez notre catalogue d'événements disponibles — concerts, matchs, spectacles. Sélectionnez la date et la catégorie de place qui vous convient."
+          },
+          {
+            "num": "02",
+            "tab": "Contactez",
+            "title": "Contactez-nous directement",
+            "body": "Envoyez-nous un message via Instagram ou WhatsApp Business. Notre équipe vous répond en quelques minutes, 7j/7, pour confirmer la disponibilité."
+          },
+          {
+            "num": "03",
+            "tab": "Payez",
+            "title": "Payez en toute sécurité",
+            "body": "Virement bancaire ou PayPal entre proches. Toutes les modalités sont confirmées avec vous avant la transaction. Zéro surprise."
+          },
+          {
+            "num": "04",
+            "tab": "Profitez",
+            "title": "Vivez l'instant",
+            "body": "Recevez vos billets par mail ou WhatsApp. Vous n'avez plus qu'à profiter — on s'est occupé du reste."
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "num",
+                "type": "string",
+                "title": "Numéro (ex: 01)"
+              },
+              {
+                "name": "tab",
+                "type": "string",
+                "title": "Onglet (court)"
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Titre"
+              },
+              {
+                "rows": 3,
+                "name": "body",
+                "type": "text",
+                "title": "Description"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "steps",
+        "type": "array",
+        "title": "Étapes"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "La fiabilité,",
+            "name": "title",
+            "type": "string",
+            "title": "Titre"
+          },
+          {
+            "initialValue": "sans le stress",
+            "name": "titleHighlight",
+            "type": "string",
+            "title": "Mot mis en avant (italique argenté)"
+          },
+          {
+            "rows": 2,
+            "initialValue": "Une expérience pensée pour vous concentrer sur ce qui compte vraiment.",
+            "name": "subtitle",
+            "type": "text",
+            "title": "Sous-titre"
+          },
+          {
+            "initialValue": [
+              {
+                "title": "Réseau de confiance",
+                "desc": "Uniquement des vendeurs vérifiés, sélectionnés sur leur historique et leur fiabilité."
+              },
+              {
+                "title": "Contact direct & rapide",
+                "desc": "Instagram ou WhatsApp Business — réponse en quelques minutes, 7j/7."
+              },
+              {
+                "title": "Packages sur mesure",
+                "desc": "Hôtel, transport, accès VIP — on construit l'expérience complète à vos côtés."
+              },
+              {
+                "title": "Paiement sécurisé",
+                "desc": "Virement bancaire ou PayPal entre proches. Modalités confirmées avant transaction."
+              }
+            ],
+            "of": [
+              {
+                "fields": [
+                  {
+                    "name": "title",
+                    "type": "string",
+                    "title": "Titre"
+                  },
+                  {
+                    "rows": 2,
+                    "name": "desc",
+                    "type": "text",
+                    "title": "Description"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "cards",
+            "type": "array",
+            "title": "Cartes"
+          }
+        ],
+        "name": "whyUs",
+        "type": "object",
+        "title": "Pourquoi nous"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "Avis clients",
+            "name": "eyebrow",
+            "type": "string"
+          },
+          {
+            "initialValue": "Ils nous font confiance",
+            "name": "title",
+            "type": "string",
+            "title": "Titre"
+          },
+          {
+            "initialValue": "+250 clients satisfaits",
+            "name": "ratingMeta",
+            "type": "string",
+            "title": "Texte note (ex: +250 clients satisfaits)"
+          }
+        ],
+        "name": "testimonials",
+        "type": "object",
+        "title": "Avis clients"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "Questions fréquentes",
+            "name": "title",
+            "type": "string",
+            "title": "Titre de section"
+          }
+        ],
+        "name": "faq",
+        "type": "object",
+        "title": "FAQ"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "Prêt à vivre l'événement",
+            "name": "title",
+            "type": "string",
+            "title": "Titre"
+          },
+          {
+            "initialValue": "de l'année",
+            "name": "titleHighlight",
+            "type": "string",
+            "title": "Mot mis en avant (italique argenté)"
+          },
+          {
+            "initialValue": "?",
+            "name": "titleSuffix",
+            "type": "string",
+            "title": "Fin du titre (après le mot mis en avant)"
+          },
+          {
+            "initialValue": "Contactez-nous, on s'occupe du reste.",
+            "name": "subtitle",
+            "type": "string",
+            "title": "Sous-titre"
+          }
+        ],
+        "name": "finalCta",
+        "type": "object",
+        "title": "CTA final"
+      }
+    ],
+    "name": "homePage",
+    "type": "document",
+    "title": "Page d'accueil"
   }
 ]
