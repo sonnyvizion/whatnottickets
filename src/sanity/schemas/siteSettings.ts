@@ -19,6 +19,19 @@ export const siteSettings = defineType({
       title: "Images du hero (carousel)",
       of: [{ type: "image", options: { hotspot: true } }],
     }),
+    defineField({
+      name: "navCtaLabel",
+      type: "string",
+      title: "Bouton Nav — texte",
+      description: "Texte du bouton en haut à droite (défaut : « Obtenir mes billets »).",
+    }),
+    defineField({
+      name: "navCtaLink",
+      type: "string",
+      title: "Bouton Nav — lien",
+      description:
+        "Où mène le bouton. Lien externe (https://wa.me/…, Instagram…) ou interne (/events, /#contact).",
+    }),
     defineField({ name: "whatsappLink", type: "url", title: "Lien WhatsApp Business global" }),
     defineField({ name: "instagramLink", type: "url", title: "Lien Instagram global" }),
     defineField({ name: "contactEmail", type: "string", title: "Email de contact" }),

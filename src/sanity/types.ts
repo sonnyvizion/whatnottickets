@@ -104,6 +104,8 @@ export interface SiteSettings {
   heroImages?: string[];
   _id: string;
   heroTagline?: string;
+  navCtaLabel?: string;
+  navCtaLink?: string;
   whatsappLink?: string;
   instagramLink?: string;
   contactEmail?: string;

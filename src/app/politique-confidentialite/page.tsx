@@ -1,4 +1,4 @@
-import Nav from "@/components/Nav";
+import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function PolitiqueConfidentialite() {
   return (
     <>
-      <Nav />
+      <NavBar />
       <main style={{ paddingTop: 100, paddingBottom: 80, minHeight: "80vh" }}>
         <div className="legal-container">
           <h1 className="legal-title">Politique de confidentialité</h1>

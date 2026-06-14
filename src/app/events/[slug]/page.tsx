@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { eventBySlugQuery, allEventSlugsQuery } from "@/sanity/queries";
 import { Event } from "@/sanity/types";
-import Nav from "@/components/Nav";
+import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { INSTAGRAM_LINK } from "@/lib/links";
 import { getEventDates, formatEventDates } from "@/lib/dates";
@@ -137,7 +137,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
-      <Nav />
+      <NavBar />
 
       {/* Hero event */}
       <section

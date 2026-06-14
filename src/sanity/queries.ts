@@ -81,6 +81,8 @@ export const siteSettingsQuery = groq`
     _id,
     heroTagline,
     "heroImages": heroImages[].asset->url,
+    navCtaLabel,
+    navCtaLink,
     whatsappLink,
     instagramLink,
     contactEmail,

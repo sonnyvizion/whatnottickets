@@ -10,7 +10,7 @@ import { Event, Testimonial, Faq, SiteSettings, HomePage as HomePageContent, Hom
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import Nav from "@/components/Nav";
+import NavBar from "@/components/NavBar";
 import Hero from "@/components/Hero";
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export default async function HomePage() {
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css"
       />
-      <Nav />
+      <NavBar />
       <main>
         <Hero heroImages={settings?.heroImages} content={home?.hero} />
         <TrustStrip items={home?.trustItems} />

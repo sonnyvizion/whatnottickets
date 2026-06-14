@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { allEventsQuery, siteSettingsQuery } from "@/sanity/queries";
 import { Event, SiteSettings } from "@/sanity/types";
-import Nav from "@/components/Nav";
+import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import EventsGrid from "@/components/EventsGrid";
 import RevealObserver from "@/components/RevealObserver";
@@ -35,7 +35,7 @@ export default async function EventsPage() {
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css"
       />
-      <Nav />
+      <NavBar />
       <main>
         <section className="section" style={{ paddingTop: "120px" }}>
           <div className="container">
