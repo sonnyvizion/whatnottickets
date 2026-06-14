@@ -2,6 +2,12 @@
   {
     "fields": [
       {
+        "readOnly": true,
+        "hidden": true,
+        "name": "orderRank",
+        "type": "string"
+      },
+      {
         "validation": [
           {
             "level": "error",
@@ -610,6 +616,18 @@
         "name": "heroImages",
         "type": "array",
         "title": "Images du hero (carousel)"
+      },
+      {
+        "description": "Texte du bouton en haut à droite (défaut : « Obtenir mes billets »).",
+        "name": "navCtaLabel",
+        "type": "string",
+        "title": "Bouton Nav — texte"
+      },
+      {
+        "description": "Où mène le bouton. Lien externe (https://wa.me/…, Instagram…) ou interne (/events, /#contact).",
+        "name": "navCtaLink",
+        "type": "string",
+        "title": "Bouton Nav — lien"
       },
       {
         "validation": [

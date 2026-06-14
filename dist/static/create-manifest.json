@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-06-11T17:56:40.847Z",
+  "createdAt": "2026-06-14T10:36:26.381Z",
   "studioVersion": "5.28.0",
   "version": 3,
   "workspaces": [
@@ -13,7 +13,7 @@
       },
       "name": "whatnottickets",
       "projectId": "51soe3m9",
-      "schema": "588ecfa0.create-schema.json",
+      "schema": "a00f9127.create-schema.json",
       "title": "WhatnotTickets",
       "tools": "ef87c8fe.create-tools.json"
     }
