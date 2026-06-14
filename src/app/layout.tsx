@@ -3,6 +3,15 @@ import { Elms_Sans } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CameraFlashes from "@/components/CameraFlashes";
+import CookieConsent from "@/components/CookieConsent";
+
+// Google Analytics 4 — coller ici l'ID de mesure (format "G-XXXXXXXXXX").
+// Laisser vide désactive complètement GA.
+const GA_ID: string = "G-57NB6YRLJM";
+// Google Search Console — coller ici le code de la balise de vérification HTML
+// (juste le contenu de l'attribut content="...", pas la balise entière).
+// Laisser vide n'ajoute aucune balise.
+const GOOGLE_SITE_VERIFICATION: string = "";
 
 const elmsSans = Elms_Sans({
   subsets: ["latin"],
@@ -48,6 +57,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: BASE_URL,
   },
+  ...(GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 const organizationSchema = {
@@ -90,6 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div style={{ position: "relative", zIndex: 1 }}>
           {children}
         </div>
+        <CookieConsent gaId={GA_ID} />
       </body>
     </html>
   );
