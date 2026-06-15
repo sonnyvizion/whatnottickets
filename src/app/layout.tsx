@@ -11,7 +11,7 @@ const GA_ID: string = "G-57NB6YRLJM";
 // Google Search Console — coller ici le code de la balise de vérification HTML
 // (juste le contenu de l'attribut content="...", pas la balise entière).
 // Laisser vide n'ajoute aucune balise.
-const GOOGLE_SITE_VERIFICATION: string = "";
+const GOOGLE_SITE_VERIFICATION: string = "56nqH9NcXk2lEOqhtZJYsd3BZyR3tCkzgTBH1-5cn74";
 
 const elmsSans = Elms_Sans({
   subsets: ["latin"],
