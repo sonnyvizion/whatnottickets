@@ -37,7 +37,7 @@ export default function ConditionsUtilisation() {
             <p>
               <strong>Nom / Raison sociale :</strong> WhatnotTickets<br />
               <strong>Forme juridique :</strong> SASU<br />
-              <strong>Adresse du siège social :</strong> 107 rue de l'Hortus, 34380 Saint-Martin-de-Londres<br />
+              <strong>Adresse du siège social :</strong> 32 rue de l'Hortus, 34380 Saint-Martin-de-Londres<br />
               <strong>Numéro SIREN :</strong> 999202351<br />
               <strong>Email :</strong> <a href="mailto:whatnottickets1@gmail.com">whatnottickets1@gmail.com</a><br />
               <strong>Téléphone :</strong> +33 7 43 52 20 51
@@ -108,7 +108,8 @@ export default function ConditionsUtilisation() {
           <section className="legal-section">
             <h2>7. Paiement</h2>
             <p>
-              Le moyen de paiement accepté par WhatnotTickets est <strong>PayPal</strong>.
+              Les moyens de paiement acceptés par WhatnotTickets sont <strong>PayPal</strong> et le{" "}
+              <strong>virement bancaire</strong>.
             </p>
             <p>
               Le paiement doit être effectué selon les modalités communiquées au client avant validation de la
@@ -116,7 +117,7 @@ export default function ConditionsUtilisation() {
             </p>
             <p>
               La réservation n'est considérée comme confirmée qu'après acceptation de l'offre par le client et
-              réception effective du paiement via PayPal.
+              réception effective du paiement via PayPal ou par virement bancaire.
             </p>
             <p>
               WhatnotTickets se réserve le droit de ne pas confirmer une réservation tant que le paiement n'a pas

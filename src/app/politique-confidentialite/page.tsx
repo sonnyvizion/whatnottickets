@@ -33,7 +33,7 @@ export default function PolitiqueConfidentialite() {
             <p>
               <strong>Nom / Raison sociale :</strong> WhatnotTickets<br />
               <strong>Forme juridique :</strong> SASU<br />
-              <strong>Adresse du siège social :</strong> 107 rue de l'Hortus, 34380 Saint-Martin-de-Londres<br />
+              <strong>Adresse du siège social :</strong> 32 rue de l'Hortus, 34380 Saint-Martin-de-Londres<br />
               <strong>Numéro SIREN :</strong> 999202351<br />
               <strong>Email :</strong> <a href="mailto:whatnottickets1@gmail.com">whatnottickets1@gmail.com</a><br />
               <strong>Téléphone :</strong> +33 7 43 52 20 51

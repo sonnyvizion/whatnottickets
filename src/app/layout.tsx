@@ -80,7 +80,7 @@ const organizationSchema = {
   ],
   address: {
     "@type": "PostalAddress",
-    streetAddress: "107 rue de l'Hortus",
+    streetAddress: "32 rue de l'Hortus",
     addressLocality: "Saint-Martin-de-Londres",
     postalCode: "34380",
     addressCountry: "FR",
